@@ -19,7 +19,6 @@ export const Search = () => {
                 cx: process.env.GOOGLE_CX,
                 start: startIndex,
             },
-            }
           })
           setResults(response.data.items)
         } catch (error) {
