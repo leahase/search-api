@@ -2,18 +2,15 @@ import axios from 'axios';
 import { ChangeEvent, FormEvent, useState } from "react";
 import { SearchResult } from "../models/Searchresult";
 
-
 export const Search = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [results, setResults] = useState<SearchResult[]>([]);
-    const [page, setPage] = useState<number>(1);
-    
 
     const handleSearch = async (e:FormEvent, requestedPage = 1) => {
         e.preventDefault()
-        setPage(requestedPage);
 
-        const startIndex = ( requestedPage - 1) * 10 + 1;
+        const startIndex = (requestedPage - 1) * 10 + 1;
+
         try {
             const response = await axios.get('https://www.googleapis.com/customsearch/v1', {
             params: {
@@ -22,6 +19,7 @@ export const Search = () => {
                 cx: process.env.GOOGLE_CX,
                 start: startIndex,
             },
+            }
           })
           setResults(response.data.items)
         } catch (error) {
