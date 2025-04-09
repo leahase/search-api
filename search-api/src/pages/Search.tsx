@@ -5,9 +5,11 @@ import { SearchResult } from "../models/Searchresult";
 export const Search = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [results, setResults] = useState<SearchResult[]>([]);
+    const [page, setPage] = useState<number>(1);
 
-    const handleSearch = async (e:FormEvent, requestedPage = 1) => {
-        e.preventDefault()
+    const handleSearch = async (e:FormEvent | null = null, requestedPage = 1) => {
+       if (e) e.preventDefault();
+        setPage(requestedPage);
 
         const startIndex = (requestedPage - 1) * 10 + 1;
 
@@ -15,8 +17,8 @@ export const Search = () => {
             const response = await axios.get('https://www.googleapis.com/customsearch/v1', {
             params: {
                 q: searchText,
-                key: process.env.API_KEY,
-                cx: process.env.GOOGLE_CX,
+                key: import.meta.env.VITE_API_KEY,
+                cx: import.meta.env.VITE_GOOGLE_CX,
                 start: startIndex,
             },
           })
@@ -29,7 +31,7 @@ export const Search = () => {
                 <>
                 <h2 >Search API</h2>
                 <section >
-                  <form onSubmit={handleSearch}>
+                  <form onSubmit={(e) => handleSearch(e, 1)}>
                     <input 
                       type="text" 
                       placeholder="search"  
@@ -52,8 +54,22 @@ export const Search = () => {
                 style={{ maxWidth: '200px' }} 
               />
             )}
+            
           </div>
+          
         ))}
+        {results.length > 0 && (
+          <div>
+            <button onClick={() => handleSearch(null, page - 1)} disabled={page === 1}>
+              previous page
+            </button>
+            <span>page {page}</span>
+            <button onClick={() => handleSearch(null, page + 1)}>
+              next page
+            </button>
+          </div>
+        )}
+        
       </section>
                 </>
             )
