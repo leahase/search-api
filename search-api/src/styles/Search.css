@@ -1,0 +1,95 @@
+.container {
+    max-width: 800px;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eceff7;
+    margin: auto;
+  }
+  
+  .heading {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2858b6;
+  }
+  
+  form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    margin: auto;
+    justify-content: center;
+  }
+
+  .input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    
+
+  }
+
+  button {
+    font-size: 1rem;
+    background-color: #3b5080;;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #648be4;
+  }
+  
+  .resultsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    
+  }
+  
+  .results {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s ease;
+    background-color: #fcfbf7;
+    margin-top: 2rem;
+  }
+  
+  .headingTitle a {
+    font-size: 1.25rem;
+    color: #3b5080;
+    text-decoration: none;
+  }
+  
+  .headingTitle a:hover {
+    text-decoration: underline;
+    color:#648be4;
+  }
+
+  .image {
+    max-width: 100%;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+  }
+ 
+  .page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .page button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background-color: #e5e7eb;
+    color: #9ca3af;
+    border-color: #d1d5db;
+  }

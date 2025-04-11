@@ -1,4 +1,5 @@
 import axios from 'axios';
+import '../styles/Search.css';
 import { ChangeEvent, FormEvent, useState } from "react";
 import { SearchResult } from "../models/Searchresult";
 
@@ -29,48 +30,51 @@ export const Search = () => {
     }
             return (
                 <>
-                <h2 >Search API</h2>
-                <section >
+                <div className='container'>
+                <h3 className='heading'>Search for furniture here:</h3>
+                <p>Here you can search through Ikea, Mio and hm</p>
                   <form onSubmit={(e) => handleSearch(e, 1)}>
                     <input 
                       type="text" 
-                      placeholder="search"  
+                      placeholder="enter here..."  
+                      className='input'
                       onChange={(e: ChangeEvent<HTMLInputElement>) => { setSearchText(e.target.value)}}
                     />
                     
                     <button type="submit"> Search</button>
                   </form>
-                </section>
 
-                <section>
-        {results.map((result, index) => (
-          <div key={index}>
-            <h3><a href={result.link}>{result.title}</a></h3>
-            <p>{result.snippet}</p>
-            {result.pagemap?.cse_image && result.pagemap.cse_image[0]?.src && (
-              <img 
-                src={result.pagemap.cse_image[0].src} 
-                alt={result.title} 
-                style={{ maxWidth: '200px' }} 
-              />
-            )}
+                <section className='resultsContainer'>
+                  {results.map((result, index) => (
+                    <div key={index} className='results'>
+                      <h3 className='headingTitle'><a href={result.link}>{result.title}</a></h3>
+                      <p>{result.snippet}</p>
+                      {result.pagemap?.cse_image && result.pagemap.cse_image[0]?.src && (
+                        <img 
+                          src={result.pagemap.cse_image[0].src} 
+                          alt={result.title} 
+                          style={{ maxWidth: '200px' }} 
+                          className='image'
+                        />
+                )}
             
-          </div>
+               </div>
           
-        ))}
-        {results.length > 0 && (
-          <div>
-            <button onClick={() => handleSearch(null, page - 1)} disabled={page === 1}>
-              previous page
-            </button>
-            <span>page {page}</span>
-            <button onClick={() => handleSearch(null, page + 1)}>
-              next page
-            </button>
-          </div>
-        )}
+              ))}
+              {results.length > 0 && (
+                <div className='page'>
+                  <button onClick={() => handleSearch(null, page - 1)} disabled={page === 1}>
+                    previous page
+                  </button>
+                  <span>page {page}</span>
+                  <button onClick={() => handleSearch(null, page + 1)}>
+                    next page
+                  </button>
+                </div>
+              )}
         
-      </section>
+              </section>
+              </div>
                 </>
             )
       }
